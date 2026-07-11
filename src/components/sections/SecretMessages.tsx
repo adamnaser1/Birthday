@@ -1,0 +1,114 @@
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const secrets = [
+  {
+    id: 1,
+    label: "💌 Read this",
+    message: "I never knew what it meant to feel completely understood until I met you. You are my safe place.",
+    color: "bg-rose/20 text-rose border-rose/50",
+  },
+  {
+    id: 2,
+    label: "🌙 Open this tonight",
+    message: "As you close your eyes tonight, remember that someone far away is falling asleep thinking only of you.",
+    color: "bg-blue-900/30 text-blue-200 border-blue-500/50",
+  },
+  {
+    id: 3,
+    label: "❤️ One more thing",
+    message: "You are the best thing that ever happened to me, and I would choose you in a hundred lifetimes, in a hundred worlds, in any version of reality.",
+    color: "bg-accent/20 text-accent border-accent/50",
+  },
+  {
+    id: 4,
+    label: "🎵 Listen to this",
+    message: "Every love song on the radio suddenly makes sense because they all remind me of you.",
+    color: "bg-gold/20 text-gold border-gold/50",
+  },
+  {
+    id: 5,
+    label: "🌹 Secret",
+    message: "I love you more than words can express, more than time can measure, and more than distance can separate.",
+    color: "bg-white/10 text-white border-white/30",
+  }
+];
+
+export default function SecretMessages() {
+  const [activeSecret, setActiveSecret] = useState<typeof secrets[0] | null>(null);
+
+  return (
+    <section className="relative w-full py-40 bg-background overflow-hidden px-4">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-24">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-5xl font-heading text-white mb-4"
+          >
+            Little Secrets
+          </motion.h2>
+          <p className="font-body text-gray-soft text-sm uppercase tracking-widest">
+            Hidden notes just for you
+          </p>
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-6 md:gap-12">
+          {secrets.map((secret, index) => (
+            <motion.button
+              key={secret.id}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setActiveSecret(secret)}
+              className={`px-6 py-3 rounded-full border backdrop-blur-sm transition-all duration-300 font-body text-sm hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] ${secret.color}`}
+            >
+              {secret.label}
+            </motion.button>
+          ))}
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {activeSecret && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActiveSecret(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.9 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-lg bg-card border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl text-center"
+            >
+              <button 
+                onClick={() => setActiveSecret(null)}
+                className="absolute top-6 right-6 text-gray-soft hover:text-white transition-colors"
+              >
+                ✕
+              </button>
+              
+              <div className="mb-6 inline-block px-4 py-1 rounded-full border border-white/10 bg-white/5 text-xs text-gray-soft uppercase tracking-widest">
+                {activeSecret.label}
+              </div>
+              
+              <p className="font-letter text-2xl md:text-4xl text-white leading-relaxed text-center">
+                &ldquo;{activeSecret.message}&rdquo;
+              </p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
+  );
+}
