@@ -40,7 +40,7 @@ export default function SecretMessages() {
   const [activeSecret, setActiveSecret] = useState<typeof secrets[0] | null>(null);
 
   return (
-    <section className="relative w-full py-40 bg-background overflow-hidden px-4">
+    <section className="relative w-full py-40 bg-transparent overflow-hidden px-4">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-24">
           <motion.h2 
@@ -82,7 +82,7 @@ export default function SecretMessages() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setActiveSecret(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-transparent/80 backdrop-blur-sm p-4"
           >
             <motion.div
               initial={{ opacity: 0, y: 50, scale: 0.9 }}

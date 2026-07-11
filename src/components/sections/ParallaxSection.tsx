@@ -24,7 +24,7 @@ export default function ParallaxSection() {
         style={{ y }}
         className="absolute inset-0 w-full h-[140%] -top-[20%] z-0"
       >
-        <div className="absolute inset-0 bg-black/60 z-10" />
+        <div className="absolute inset-0 bg-transparent/60 z-10" />
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url('/media/17.jpeg')` }} // Assuming 17.jpeg is a nice background picture

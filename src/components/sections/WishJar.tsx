@@ -77,7 +77,7 @@ export default function WishJar() {
   };
 
   return (
-    <section className="relative w-full py-32 bg-background flex flex-col items-center px-4">
+    <section className="relative w-full py-32 bg-transparent flex flex-col items-center px-4">
       <div className="text-center mb-16 z-10">
         <h2 className="text-4xl md:text-6xl font-heading text-white mb-4">The Wish Jar</h2>
         <p className="font-body text-gray-soft text-lg font-light">Tap the jar to pull out a birthday wish</p>
@@ -137,7 +137,7 @@ export default function WishJar() {
                 transition={{ duration: 0.5, type: "spring" }}
                 className="bg-card/80 backdrop-blur-md border border-gold/30 p-6 rounded-2xl shadow-xl w-full text-center relative"
               >
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 text-gold bg-background px-2">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 text-gold bg-transparent px-2">
                   <FaRegStar size={16} />
                 </div>
                 <p className="font-letter text-2xl md:text-3xl text-white">

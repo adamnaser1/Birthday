@@ -118,7 +118,7 @@ export default function ReasonsILoveYou() {
   };
 
   return (
-    <section className="relative w-full py-32 bg-background flex flex-col items-center px-4 overflow-hidden">
+    <section className="relative w-full py-32 bg-transparent flex flex-col items-center px-4 overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg h-96 bg-rose/10 blur-[100px] rounded-full pointer-events-none" />
 
       <div className="text-center mb-16 z-10">

@@ -26,7 +26,7 @@ export default function PhotoMemory() {
   }, []);
 
   return (
-    <section className="relative w-full py-32 bg-background overflow-hidden min-h-screen flex flex-col items-center">
+    <section className="relative w-full py-32 bg-transparent overflow-hidden min-h-screen flex flex-col items-center">
       <div className="text-center mb-24 z-10">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}

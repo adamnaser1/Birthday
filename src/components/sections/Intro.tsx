@@ -35,7 +35,7 @@ export default function Intro({ onBegin }: IntroProps) {
 
   return (
     <motion.section
-      className="relative flex flex-col items-center justify-center min-h-screen w-full bg-background overflow-hidden z-30"
+      className="relative flex flex-col items-center justify-center min-h-screen w-full bg-transparent overflow-hidden z-30"
       initial="hidden"
       animate="visible"
       exit="exit"
