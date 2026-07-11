@@ -13,11 +13,11 @@ export default function Intro({ onBegin }: IntroProps) {
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
-    visible: { 
+    visible: {
       opacity: 1,
       transition: { duration: 1.5 }
     },
-    exit: { 
+    exit: {
       opacity: 0,
       y: -50,
       transition: { duration: 1, ease: "easeInOut" as const }
@@ -26,15 +26,15 @@ export default function Intro({ onBegin }: IntroProps) {
 
   const textVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: { duration: 1.2, ease: "easeOut" as const }
     }
   };
 
   return (
-    <motion.section 
+    <motion.section
       className="relative flex flex-col items-center justify-center min-h-screen w-full bg-background overflow-hidden z-30"
       initial="hidden"
       animate="visible"
@@ -45,7 +45,7 @@ export default function Intro({ onBegin }: IntroProps) {
 
       <div className="z-10 flex flex-col items-center justify-center text-center px-4 max-w-4xl">
         {step === 0 && (
-          <motion.h1 
+          <motion.h1
             key="step1"
             variants={textVariants}
             initial="hidden"
@@ -56,7 +56,7 @@ export default function Intro({ onBegin }: IntroProps) {
             }}
             className="text-5xl md:text-7xl lg:text-8xl font-heading text-white tracking-wide"
           >
-            Hey Beautiful <span className="text-accent">❤️</span>
+            Hey Hann <span className="text-accent">❤️</span>
           </motion.h1>
         )}
 
@@ -71,7 +71,7 @@ export default function Intro({ onBegin }: IntroProps) {
             <h2 className="text-3xl md:text-5xl font-heading text-gray-soft font-light italic">
               Before your birthday begins...
             </h2>
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.5, duration: 1.2 }}

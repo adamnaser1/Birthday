@@ -22,7 +22,7 @@ export default function Countdown({ onOpenGift }: CountdownProps) {
   useEffect(() => {
     isClient.current = true;
     // Target Date: July 13th, 2026, 00:00:00
-    const targetDate = new Date("2026-07-13T00:00:00").getTime();
+    const targetDate = new Date("2025-07-13T00:00:00").getTime();
 
     const updateCountdown = () => {
       const now = new Date().getTime();
@@ -115,7 +115,7 @@ export default function Countdown({ onOpenGift }: CountdownProps) {
             transition={{ duration: 1.5, ease: "easeOut" }}
             className="flex flex-col items-center text-center z-20"
           >
-            <motion.h2 
+            <motion.h2
               className="text-5xl md:text-7xl lg:text-8xl font-heading text-transparent bg-clip-text bg-gradient-to-r from-gold via-white to-rose mb-12"
               animate={{ backgroundPosition: ["0%", "100%", "0%"] }}
               transition={{ duration: 5, repeat: Infinity, ease: "linear" }}

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 
 const videos = [
-  "vd1.mp4", "vd2.mp4", "vd3.mp4", "vd4.mp4", "vd5.mp4", "vd6.mp4"
+  "vd1.mp4", "vd2.mp4", "vd3.mp4"
 ];
 
 export default function VideoSection() {
