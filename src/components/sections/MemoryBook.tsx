@@ -14,12 +14,12 @@ interface Page {
 
 const pages: Page[] = [
   { type: "mixed", photo: "2.jpeg", title: "Where it all began", note: "The moment everything changed ❤️", sticker: "📌" },
-  { type: "text", title: "Dear Hanni,", note: "I remember the first time we talked. My heart already knew you were special before my brain caught up." },
-  { type: "mixed", photo: "3.jpeg", title: "Getting closer", note: "Every conversation made me fall harder", sticker: "💕" },
-  { type: "mixed", photo: "4.jpeg", title: "That smile", note: "The smile that could light up entire cities", sticker: "✨" },
+  { type: "text", title: "Dear Hanni,", note: "I remember the first time we talked.Wallah my heart already knew you were special before my brain caught up." },
+  { type: "mixed", photo: "15.jpeg", title: "Getting closer", note: "Every conversation made me fall harder", sticker: "💕" },
+  { type: "mixed", photo: "33.jpeg", title: "That smile", note: "The smile that could light up entire cities", sticker: "✨" },
   { type: "text", title: "A little secret:", note: "I replay our conversations in my head before I sleep. Every. Single. Night." },
-  { type: "mixed", photo: "6.jpeg", title: "My favorite", note: "I could stare at this photo forever", sticker: "🌹" },
-  { type: "mixed", photo: "k23.jpeg", title: "Us", note: "The best team in the world", sticker: "💫" },
+  { type: "mixed", photo: "18.jpeg", title: "My favorite", note: "I could stare at this photo forever", sticker: "🌹" },
+  { type: "mixed", photo: "14.jpeg", title: "Us", note: "The best team in the world", sticker: "💫" },
   { type: "text", title: "Promise:", note: "One day, the distance will just be a memory. And I will be holding your hand for real. That day is coming. ❤️" },
 ];
 
@@ -102,8 +102,8 @@ export default function MemoryBook() {
                 {/* Tape decoration */}
                 <div
                   className="absolute top-4 bg-yellow-200/60 h-6 w-20 z-20"
-                  style={{ 
-                    left: `${tape.x}%`, 
+                  style={{
+                    left: `${tape.x}%`,
                     transform: `rotate(${tape.rotate}deg)`,
                     boxShadow: "0 1px 3px rgba(0,0,0,0.1)"
                   }}
@@ -116,7 +116,7 @@ export default function MemoryBook() {
 
                 {/* Photo */}
                 {page.photo && (
-                  <div className="relative mx-auto mt-10 mb-6 w-64 h-64 md:w-72 md:h-72 bg-white p-2 shadow-md" 
+                  <div className="relative mx-auto mt-10 mb-6 w-64 h-64 md:w-72 md:h-72 bg-white p-2 shadow-md"
                     style={{ transform: `rotate(${tape.rotate * 0.5}deg)` }}
                   >
                     <Image

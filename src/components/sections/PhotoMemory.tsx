@@ -7,10 +7,11 @@ import "yet-another-react-lightbox/styles.css";
 import Image from "next/image";
 
 const photos = [
+  "k23.jpeg", "k24.jpeg", "k25.jpeg",
   "2.jpeg", "3.jpeg", "4.jpeg", "6.jpeg", "7.jpeg", "8.jpeg", "9.jpeg",
-  "10.jpeg", "11.jpeg", "36.jpeg", "13.jpeg", "14.jpeg", "15.jpeg", "16.jpeg", 
+  "11.jpeg", "36.jpeg", "13.jpeg", "14.jpeg", "15.jpeg", "16.jpeg", 
   "17.jpeg", "18.jpeg", "19.jpeg", "20.jpeg", "21.jpeg", "22.jpeg", "31.jpeg", 
-  "32.jpeg", "33.jpeg", "35.jpeg", "k23.jpeg", "k24.jpeg", "k25.jpeg", "r27.jpeg", 
+  "32.jpeg", "33.jpeg", "35.jpeg", "r27.jpeg", 
   "r29.jpeg", "r30.jpeg", "r34.jpeg", "s26.jpeg", "s28.jpeg"
 ];
 

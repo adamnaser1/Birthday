@@ -7,13 +7,13 @@ const secrets = [
   {
     id: 1,
     label: "💌 Read this",
-    message: "I never knew what it meant to feel completely understood until I met you. You are my safe place.",
+    message: "If you're reading this, I hope you're smiling already. And if you're not... then here's a reminder: somewhere in Tunisia there's a guy who feels incredibly lucky that you exist. Thank you for making my ordinary days feel extraordinary. ❤️",
     color: "bg-rose/20 text-rose border-rose/50",
   },
   {
     id: 2,
     label: "🌙 Open this tonight",
-    message: "As you close your eyes tonight, remember that someone far away is falling asleep thinking only of you.",
+    message: "Tonight, before you close your eyes, imagine me saying what I always wish I could say in person: good night, sleep well, sweet dreams, and don't let anything steal that beautiful smile of yours. I'll be thinking about you. 🌙🤍",
     color: "bg-blue-900/30 text-blue-200 border-blue-500/50",
   },
   {

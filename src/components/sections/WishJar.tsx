@@ -5,56 +5,56 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaRegStar } from "react-icons/fa";
 
 const wishes = [
-  "May your days be as beautiful as your heart.",
-  "I wish you endless joy and unstoppable laughter.",
-  "May all your wildest dreams come true this year.",
-  "I wish for us to create a million more memories.",
-  "May you always feel as loved as you make me feel.",
-  "I wish you health, wealth, and profound peace.",
-  "May your smile never fade.",
-  "I wish you success in every endeavor you pursue.",
-  "May your path be illuminated by stars.",
-  "I wish for every day to bring you a new reason to smile.",
-  "May the world treat you with the kindness you give to it.",
-  "I wish you unwavering confidence in your beautiful self.",
-  "May this year be the start of your greatest chapter yet.",
-  "I wish for our love to grow stronger with every passing second.",
-  "May you find magic in the ordinary moments.",
-  "I wish you the courage to chase your biggest goals.",
-  "May you always be surrounded by people who cherish you.",
-  "I wish you moments of breathtaking wonder.",
-  "May your heart always be light and free.",
-  "I wish you comfort on your hardest days.",
-  "May your spirit remain forever unbroken.",
-  "I wish you the realization of how truly special you are.",
-  "May serendipity follow you wherever you go.",
-  "I wish you an abundance of sweet surprises.",
-  "May you always see the beauty in your reflection.",
-  "I wish you a lifetime of holding my hand.",
-  "May your passions ignite the world.",
-  "I wish you peace that surpasses all understanding.",
-  "May your journey be filled with glorious adventures.",
-  "I wish you the strength to overcome any obstacle.",
-  "May you always feel at home in my arms.",
-  "I wish you a year of monumental breakthroughs.",
-  "May every sunset bring you a promise of a better tomorrow.",
-  "I wish you the fulfillment of your heart's deepest desires.",
-  "May you never lose your radiant spark.",
-  "I wish you an ocean of tranquility.",
-  "May your creativity know no bounds.",
-  "I wish you the joy of discovering new places and things.",
-  "May you always feel deeply, madly loved.",
-  "I wish you perfectly timed serendipities.",
-  "May the universe align in your favor.",
-  "I wish you sweet dreams that turn into reality.",
-  "May you always have a reason to celebrate.",
-  "I wish you a year filled with firsts.",
-  "May your laughter echo in the halls of my memory forever.",
-  "I wish you a heart full of gratitude and grace.",
-  "May you be a magnet for miracles.",
-  "I wish you endless inspiration.",
-  "May your days be painted with your favorite colors.",
-  "I wish you the happiest birthday imaginable."
+  "May Allah fill your life with endless happiness and barakah.",
+  "Insha'Allah, every dream you've been quietly holding onto comes true.",
+  "I pray that this year brings you more peace than you've ever known.",
+  "May every du'a you whisper be answered in the most beautiful way.",
+  "May Allah keep your smile bright and your heart at ease.",
+  "Insha'Allah, you'll always find light, even on the darkest days.",
+  "I hope Allah blesses you with a life full of love, laughter, and unforgettable memories.",
+  "May your birthday mark the beginning of your happiest chapter yet.",
+  "I ask Allah to protect you wherever life takes you.",
+  "May your heart always find comfort in Allah's mercy.",
+  "Insha'Allah, every step you take leads you to something beautiful.",
+  "May Allah replace every worry with relief and every tear with joy.",
+  "I hope this year surprises you with blessings you never expected.",
+  "May Allah grant you good health, endless happiness, and a peaceful heart.",
+  "May your path always be guided by His light.",
+  "Insha'Allah, you'll wake up every morning with hope and go to sleep with gratitude.",
+  "I pray that Allah opens doors for you that no one can close.",
+  "May your life always be filled with people who genuinely love and appreciate you.",
+  "May Allah grant you strength whenever life becomes difficult.",
+  "Insha'Allah, you'll never stop believing in yourself.",
+  "May every challenge become a reason for you to grow stronger.",
+  "I pray that Allah blesses your future with more than you could ever imagine.",
+  "May your beautiful heart always find reasons to smile.",
+  "Insha'Allah, your kindness returns to you a thousand times over.",
+  "May Allah write only goodness in your destiny.",
+  "I hope your happiest memories are still waiting to be made.",
+  "May Allah make your heart bloom with peace, just like a garden after the rain.",
+  "Insha'Allah, this birthday is only the beginning of something wonderful.",
+  "May Allah surround you with His mercy every single day.",
+  "I pray that every year makes you even happier than the one before.",
+  "May Allah make your dreams easier to reach than you ever imagined.",
+  "Insha'Allah, every sunset reminds you that tomorrow always brings new hope.",
+  "May Allah protect your beautiful soul from every harm.",
+  "I hope your life is filled with little miracles that make you smile.",
+  "May Allah bless your family and keep them safe and healthy.",
+  "Insha'Allah, you'll always find peace wherever your heart goes.",
+  "I pray that Allah grants you success in everything that's good for you.",
+  "May every birthday bring you closer to the life you've always wished for.",
+  "May Allah give you a heart that stays grateful through every season of life.",
+  "Insha'Allah, your future is brighter than your dreams today.",
+  "May Allah bless every smile you share with the world.",
+  "I pray you'll always have someone to remind you how special you are.",
+  "May Allah reward your kind heart with endless blessings.",
+  "Insha'Allah, your laughter never fades and your hope never disappears.",
+  "May your life always be filled with barakah, love, and beautiful surprises.",
+  "I ask Allah to grant you both happiness in this life and Jannat Al-Firdaws in the next.",
+  "May Allah make your heart feel at home wherever you are.",
+  "Insha'Allah, every chapter ahead is even more beautiful than the last.",
+  "I pray that Allah accepts every sincere du'a you make.",
+  "Happy Birthday ❤️ May Allah always keep you under His protection and shower your life with endless blessings."
 ];
 
 export default function WishJar() {
@@ -85,7 +85,7 @@ export default function WishJar() {
 
       <div className="relative w-full max-w-md flex flex-col items-center">
         {/* The Glass Jar */}
-        <motion.div 
+        <motion.div
           onClick={pullWish}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.95 }}
@@ -94,22 +94,22 @@ export default function WishJar() {
           {/* Jar Lid */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-gradient-to-b from-[#b87333] to-[#8c5222] rounded-sm shadow-md z-20" />
           <div className="absolute top-5 left-1/2 -translate-x-1/2 w-32 h-4 bg-gradient-to-b from-[#8c5222] to-[#5c3211] rounded-b-md z-20" />
-          
+
           {/* Jar Body */}
           <div className="absolute top-8 left-0 w-full h-[calc(100%-2rem)] bg-white/5 backdrop-blur-md border-2 border-white/20 rounded-[2rem] rounded-t-xl shadow-[inset_0_0_50px_rgba(255,255,255,0.1),_0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-50" />
-            
+
             {/* Glowing stars inside */}
             {starProps.map((star, i) => (
               <motion.div
                 key={i}
-                animate={{ 
-                  y: [0, -10, 0], 
+                animate={{
+                  y: [0, -10, 0],
                   opacity: [0.5, 1, 0.5],
                   scale: [1, 1.2, 1]
                 }}
-                transition={{ 
-                  duration: star.duration, 
+                transition={{
+                  duration: star.duration,
                   repeat: Infinity,
                   delay: star.delay
                 }}

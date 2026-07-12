@@ -18,7 +18,7 @@ const dreams = [
   { text: "Finally meet in person ❤️", emoji: "🤝" },
   { text: "Travel the world together 🌍", emoji: "🗺️" },
   { text: "Our first apartment 🏠", emoji: "🏡" },
-  { text: "Cook dinner together 🍝", emoji: "👨‍🍳" },
+  { text: "Cooking together 🍝", emoji: "👨‍🍳" },
   { text: "Watch a sunset side by side 🌅", emoji: "🌇" },
   { text: "Spend every birthday together 🎂", emoji: "🎉" },
   { text: "Grow old together 👴👵", emoji: "💍" },
