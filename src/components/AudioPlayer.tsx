@@ -13,22 +13,22 @@ interface AudioPlayerProps {
 const playlist = [
   {
     id: 1,
-    title: "Our Love Story",
-    artist: "Adam & Hann",
+    title: "Earned it ",
+    artist: "The Weekend",
     src: "/media/song.mp3",
     cover: "/media/2.jpeg",
   },
   {
     id: 2,
     title: "As You Are",
-    artist: "Adam & Hann",
+    artist: "The Weekend",
     src: "/media/As You Are.mp3",
     cover: "/media/8.jpeg",
   },
   {
     id: 3,
     title: "Stand By Me",
-    artist: "Adam & Hann",
+    artist: "From me to YOU",
     src: "/media/Stand By Me  Cinematic Orchestral Cover  Emotional.mp3",
     cover: "/media/10.jpeg",
   }
@@ -190,8 +190,8 @@ export default function AudioPlayer({ isPlaying, onPlayChange }: AudioPlayerProp
                   <div className="w-full mb-6">
                     <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden cursor-pointer relative group">
                       <div
-                         className="h-full bg-gold rounded-full relative"
-                         style={{ width: `${progress}%` }}
+                        className="h-full bg-gold rounded-full relative"
+                        style={{ width: `${progress}%` }}
                       >
                         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-[0_0_10px_rgba(212,175,55,0.8)] opacity-0 group-hover:opacity-100 transition-opacity translate-x-1/2" />
                       </div>

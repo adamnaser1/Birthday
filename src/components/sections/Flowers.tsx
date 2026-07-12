@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
@@ -63,7 +63,12 @@ const flowers: FlowerData[] = [
 ];
 
 function FlowerSVG({ flower, isGrown, onClick, index }: { flower: FlowerData; isGrown: boolean; onClick: () => void; index: number }) {
-  // No more CSS petals, we render the image directly
+  const petals = useMemo(() => {
+    return Array.from({ length: flower.petalCount }).map((_, i) => {
+      const angle = (360 / flower.petalCount) * i;
+      return { angle, key: i };
+    });
+  }, [flower.petalCount]);
 
   return (
     <motion.div 
@@ -76,21 +81,35 @@ function FlowerSVG({ flower, isGrown, onClick, index }: { flower: FlowerData; is
       transition={{ duration: 0.8, delay: index * 0.2 }}
     >
       {/* Flower head */}
-      <motion.div 
-        className="relative w-24 h-24 md:w-32 md:h-32 z-10 rounded-full border-4 shadow-[0_0_20px_rgba(0,0,0,0.5)] overflow-hidden"
-        style={{ borderColor: flower.color, backgroundColor: "#000" }}
-        initial={{ opacity: 0 }}
-        animate={isGrown ? { opacity: 1 } : {}}
-        transition={{ duration: 1.2, ease: "easeOut" }}
-      >
-        <Image 
-          src={`/media/${flower.photo}`} 
-          alt={flower.name} 
-          fill 
-          sizes="128px"
-          className="object-cover" 
+      <div className="relative w-28 h-28 md:w-32 md:h-32 z-10">
+        {petals.map(({ angle, key }) => (
+          <motion.div
+            key={key}
+            className="absolute top-1/2 left-1/2 origin-bottom"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={isGrown ? { scale: 1, opacity: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.8 + key * 0.1, type: "spring" }}
+            style={{
+              transform: `translate(-50%, -100%) rotate(${angle}deg)`,
+              width: 25,
+              height: 45,
+            }}
+          >
+            <div
+              className="w-full h-full rounded-t-full shadow-[0_0_10px_rgba(255,255,255,0.1)]"
+              style={{ backgroundColor: flower.petalColor, opacity: 0.95 }}
+            />
+          </motion.div>
+        ))}
+
+        <motion.div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full z-10 shadow-inner"
+          initial={{ scale: 0 }}
+          animate={isGrown ? { scale: 1 } : {}}
+          transition={{ duration: 0.5, delay: 1.6 }}
+          style={{ backgroundColor: flower.name === "Sunflower" ? "#5c3d0a" : (flower.name === "Daisy" ? "#e8c84a" : flower.color) }}
         />
-      </motion.div>
+      </div>
 
       {/* Stem */}
       <motion.div
@@ -136,15 +155,16 @@ export default function Flowers() {
   const [activeFlower, setActiveFlower] = useState<number | null>(null);
 
   const handleFlowerClick = (index: number) => {
+    // Grow the flower if it isn't already grown
     if (!grownFlowers.has(index)) {
       setGrownFlowers(prev => {
         const next = new Set(prev);
         next.add(index);
         return next;
       });
-    } else {
-      setActiveFlower(index);
     }
+    // Show the photo directly immediately!
+    setActiveFlower(index);
   };
 
   const allGrown = grownFlowers.size === flowers.length;
@@ -162,8 +182,8 @@ export default function Flowers() {
         </motion.h2>
         <p className="font-body text-gray-soft text-base md:text-lg px-4">
           {allGrown 
-            ? "Your garden is full. Tap any flower to see the beautiful photos you sent."
-            : "Tap each seed to grow a flower. Tap again to reveal its photo."}
+            ? "Your garden is full. Tap any flower to see the beautiful photos again."
+            : "Tap each seed to grow a flower and reveal its photo."}
         </p>
       </div>
 
