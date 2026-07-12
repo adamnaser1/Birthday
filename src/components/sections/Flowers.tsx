@@ -79,9 +79,9 @@ function FlowerSVG({ flower, isGrown, onClick, index }: { flower: FlowerData; is
       <motion.div 
         className="relative w-24 h-24 md:w-32 md:h-32 z-10 rounded-full border-4 shadow-[0_0_20px_rgba(0,0,0,0.5)] overflow-hidden"
         style={{ borderColor: flower.color, backgroundColor: "#000" }}
-        initial={{ scale: 0, opacity: 0 }}
-        animate={isGrown ? { scale: 1, opacity: 1 } : {}}
-        transition={{ duration: 0.8, delay: 0.8, type: "spring", damping: 15 }}
+        initial={{ opacity: 0 }}
+        animate={isGrown ? { opacity: 1 } : {}}
+        transition={{ duration: 1.2, ease: "easeOut" }}
       >
         <Image 
           src={`/media/${flower.photo}`} 
@@ -216,10 +216,10 @@ export default function Flowers() {
             onClick={() => setActiveFlower(null)}
           >
             <motion.div
-              initial={{ scale: 0.8, y: 30 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.8, y: 30 }}
-              transition={{ type: "spring", damping: 20 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
               className="bg-card/90 backdrop-blur-xl border border-gold/30 p-6 md:p-10 rounded-2xl max-w-lg w-full flex flex-col items-center text-center shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
               onClick={e => e.stopPropagation()}
             >
