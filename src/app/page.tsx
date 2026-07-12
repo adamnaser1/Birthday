@@ -25,11 +25,13 @@ import ScratchCard from "@/components/sections/ScratchCard";
 
 import FutureConstellation from "@/components/sections/FutureConstellation";
 import MemoryBook from "@/components/sections/MemoryBook";
+import BirthdayReveal from "@/components/sections/BirthdayReveal";
 import confetti from "canvas-confetti";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
-  const [hasStarted, setHasStarted] = useState(false);
+  const [countdownFinished, setCountdownFinished] = useState(false);
+  const [introClicked, setIntroClicked] = useState(false);
   const [giftOpened, setGiftOpened] = useState(false);
   const [audioPlaying, setAudioPlaying] = useState(false);
 
@@ -125,7 +127,7 @@ export default function Home() {
   };
 
   const handleBegin = () => {
-    setHasStarted(true);
+    setIntroClicked(true);
     setAudioPlaying(true);
   };
 
@@ -143,10 +145,24 @@ export default function Home() {
       <AudioPlayer isPlaying={audioPlaying} onPlayChange={setAudioPlaying} />
 
       <AnimatePresence>
-        {!loading && !hasStarted && (
+        {!loading && !countdownFinished && (
+          <motion.div
+            key="countdown"
+            className="fixed inset-0 z-50 bg-background"
+            exit={{ opacity: 0, transition: { duration: 1.5, ease: "easeInOut" } }}
+          >
+            <Countdown onFinish={() => setCountdownFinished(true)} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {!loading && countdownFinished && !introClicked && (
           <motion.div
             key="intro"
             className="fixed inset-0 z-40 bg-background"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: { duration: 1.5 } }}
             exit={{ opacity: 0, transition: { duration: 1.5, ease: "easeInOut" } }}
           >
             <div onClick={handleTitleTap}>
@@ -157,9 +173,9 @@ export default function Home() {
       </AnimatePresence>
 
       <AnimatePresence>
-        {hasStarted && !giftOpened && (
+        {introClicked && !giftOpened && (
           <motion.div
-            key="countdown"
+            key="reveal"
             className="fixed inset-0 z-30 bg-background"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { duration: 1.5 } }}
@@ -170,7 +186,7 @@ export default function Home() {
               transition: { duration: 2, ease: "easeInOut" } 
             }}
           >
-            <Countdown onOpenGift={handleOpenGift} />
+            <BirthdayReveal onOpenGift={handleOpenGift} />
           </motion.div>
         )}
       </AnimatePresence>
