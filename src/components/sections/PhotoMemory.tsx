@@ -19,7 +19,7 @@ export default function PhotoMemory() {
 
   // Pre-generate rotations using a deterministic seed based on index
   const photoStyles = useMemo(() => {
-    return photos.slice(0, 15).map((_, i) => ({
+    return photos.slice(0, 35).map((_, i) => ({
       rotate: (i % 2 === 0 ? 1 : -1) * ((i * 7.3 + 3.1) % 15 + 5),
       yOffset: ((i * 13.7 + 5.9) % 40) - 20,
     }));
@@ -41,7 +41,7 @@ export default function PhotoMemory() {
 
       {/* Scattered Polaroids */}
       <div className="relative w-full max-w-6xl mx-auto min-h-[80vh] flex flex-wrap justify-center items-center gap-4 md:gap-8 p-4">
-        {photos.slice(0, 15).map((photo, i) => {
+        {photos.slice(0, 35).map((photo, i) => {
           const { rotate, yOffset } = photoStyles[i];
 
           return (
@@ -86,7 +86,7 @@ export default function PhotoMemory() {
         open={index >= 0}
         close={() => setIndex(-1)}
         index={index}
-        slides={photos.slice(0, 15).map((p) => ({ src: `/media/${p}` }))}
+        slides={photos.slice(0, 35).map((p) => ({ src: `/media/${p}` }))}
         styles={{ container: { backgroundColor: "rgba(9, 9, 9, 0.95)" } }}
       />
     </section>

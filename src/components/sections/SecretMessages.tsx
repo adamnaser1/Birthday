@@ -25,7 +25,9 @@ const secrets = [
   {
     id: 4,
     label: "🎵 Listen to this",
-    message: "Every love song on the radio suddenly makes sense because they all remind me of you.",
+    message: "This is your favorite song. Every time I hear it, I think of you.",
+    link: "https://www.youtube.com/watch?v=8CWy_-afIpY&list=RD8CWy_-afIpY&start_radio=1",
+    linkText: "Listen to 'As You Are' on YouTube",
     color: "bg-gold/20 text-gold border-gold/50",
   },
   {
@@ -67,7 +69,7 @@ export default function SecretMessages() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setActiveSecret(secret)}
-              className={`px-6 py-3 rounded-full border backdrop-blur-sm transition-all duration-300 font-body text-sm hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] ${secret.color}`}
+              className={`px-6 py-3 rounded-full border backdrop-blur-sm transition-all duration-300 font-body text-sm md:text-base hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] ${secret.color}`}
             >
               {secret.label}
             </motion.button>
@@ -82,14 +84,14 @@ export default function SecretMessages() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setActiveSecret(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-transparent/80 backdrop-blur-sm p-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-transparent/80 backdrop-blur-md p-4"
           >
             <motion.div
               initial={{ opacity: 0, y: 50, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.9 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-lg bg-card border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl text-center"
+              className="relative w-full max-w-lg bg-card/90 border border-white/10 rounded-3xl p-8 md:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.5)] text-center flex flex-col items-center"
             >
               <button 
                 onClick={() => setActiveSecret(null)}
@@ -98,13 +100,24 @@ export default function SecretMessages() {
                 ✕
               </button>
               
-              <div className="mb-6 inline-block px-4 py-1 rounded-full border border-white/10 bg-white/5 text-xs text-gray-soft uppercase tracking-widest">
+              <div className="mb-8 inline-block px-4 py-1 rounded-full border border-white/10 bg-white/5 text-xs text-gray-soft uppercase tracking-widest">
                 {activeSecret.label}
               </div>
               
-              <p className="font-letter text-2xl md:text-4xl text-white leading-relaxed text-center">
+              <p className="font-letter text-2xl md:text-4xl text-white leading-relaxed text-center mb-6">
                 &ldquo;{activeSecret.message}&rdquo;
               </p>
+
+              {activeSecret.link && (
+                <a 
+                  href={activeSecret.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="mt-4 px-6 py-3 bg-gold text-black font-body uppercase tracking-wider text-sm rounded-full hover:bg-white hover:text-black transition-colors shadow-[0_0_15px_rgba(212,175,55,0.4)]"
+                >
+                  {activeSecret.linkText}
+                </a>
+              )}
             </motion.div>
           </motion.div>
         )}

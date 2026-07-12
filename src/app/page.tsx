@@ -22,7 +22,7 @@ import FinalSurprise from "@/components/sections/FinalSurprise";
 import Flowers from "@/components/sections/Flowers";
 import BirthdayCake from "@/components/sections/BirthdayCake";
 import ScratchCard from "@/components/sections/ScratchCard";
-import DistanceMap from "@/components/sections/DistanceMap";
+
 import FutureConstellation from "@/components/sections/FutureConstellation";
 import MemoryBook from "@/components/sections/MemoryBook";
 import confetti from "canvas-confetti";
@@ -190,7 +190,7 @@ export default function Home() {
             <Flowers />
             <PhotoMemory />
             <ParallaxSection />
-            <DistanceMap />
+
             <VideoSection />
             <ReasonsILoveYou />
             <LoveLetter />

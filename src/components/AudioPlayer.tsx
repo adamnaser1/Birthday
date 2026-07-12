@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute, FaStepForward, FaStepBackward, FaChevronUp, FaChevronDown, FaHeart } from "react-icons/fa";
 import Image from "next/image";
@@ -66,12 +66,15 @@ const lyrics = [
 
 export default function AudioPlayer({ isPlaying, onPlayChange }: AudioPlayerProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [progress, setProgress] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+
+  const track = playlist[currentTrackIndex];
 
   useEffect(() => {
     if (isPlaying && audioRef.current) {
@@ -80,7 +83,7 @@ export default function AudioPlayer({ isPlaying, onPlayChange }: AudioPlayerProp
     } else if (!isPlaying && audioRef.current) {
       audioRef.current.pause();
     }
-  }, [isPlaying]);
+  }, [isPlaying, currentTrackIndex]);
 
   const toggleMute = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -93,6 +96,16 @@ export default function AudioPlayer({ isPlaying, onPlayChange }: AudioPlayerProp
   const togglePlay = (e: React.MouseEvent) => {
     e.stopPropagation();
     onPlayChange(!isPlaying);
+  };
+
+  const nextTrack = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentTrackIndex((prev) => (prev + 1) % playlist.length);
+  };
+
+  const prevTrack = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentTrackIndex((prev) => (prev === 0 ? playlist.length - 1 : prev - 1));
   };
 
   const handleTimeUpdate = () => {
@@ -108,6 +121,10 @@ export default function AudioPlayer({ isPlaying, onPlayChange }: AudioPlayerProp
     }
   };
 
+  const handleEnded = () => {
+    setCurrentTrackIndex((prev) => (prev + 1) % playlist.length);
+  };
+
   const formatTime = (time: number) => {
     if (isNaN(time)) return "0:00";
     const minutes = Math.floor(time / 60);
@@ -115,17 +132,18 @@ export default function AudioPlayer({ isPlaying, onPlayChange }: AudioPlayerProp
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
 
-  const currentLyric = lyrics.slice().reverse().find(lyric => currentTime >= lyric.time)?.text || "♪";
+  // Simple visualizer text instead of lyrics
+  const currentLyric = isPlaying ? "♪ Playing ♪" : "Paused";
 
   return (
     <>
       <audio
         ref={audioRef}
-        src="/media/song.mp3"
-        loop
+        src={track.src}
         preload="auto"
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleLoadedMetadata}
+        onEnded={handleEnded}
         className="hidden"
       />
 
@@ -134,7 +152,7 @@ export default function AudioPlayer({ isPlaying, onPlayChange }: AudioPlayerProp
           <motion.div
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            className={`fixed bottom-6 right-6 z-50 flex flex-col bg-[#0a0a0a]/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${expanded ? 'w-80 p-6' : 'w-72 p-3 cursor-pointer hover:bg-[#1a1a1a]/90'}`}
+            className={`fixed bottom-4 md:bottom-6 right-4 md:right-6 z-50 flex flex-col bg-[#0a0a0a]/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${expanded ? 'w-[calc(100vw-32px)] md:w-80 p-6' : 'w-64 md:w-72 p-3 cursor-pointer hover:bg-[#1a1a1a]/90'}`}
             onClick={() => !expanded && setExpanded(true)}
           >
             {/* Top Bar (Collapse) */}
@@ -155,13 +173,14 @@ export default function AudioPlayer({ isPlaying, onPlayChange }: AudioPlayerProp
               {/* Album Art */}
               <motion.div
                 layoutId="album-art"
-                className={`relative overflow-hidden rounded-lg shadow-2xl ${expanded ? 'w-56 h-56 mb-8' : 'w-12 h-12 flex-shrink-0'}`}
+                className={`relative overflow-hidden rounded-lg shadow-2xl ${expanded ? 'w-48 h-48 md:w-56 md:h-56 mb-8' : 'w-10 h-10 md:w-12 md:h-12 flex-shrink-0'}`}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-gold/20 to-rose/20 z-10" />
                 <Image
-                  src="/media/2.jpeg" // Using one of the provided photos as album art
+                  src={track.cover}
                   alt="Album Art"
                   fill
+                  sizes="200px"
                   className={`object-cover ${isPlaying ? 'animate-[spin_20s_linear_infinite]' : ''}`}
                   style={{ borderRadius: expanded ? '16px' : '50%' }}
                 />
@@ -172,10 +191,10 @@ export default function AudioPlayer({ isPlaying, onPlayChange }: AudioPlayerProp
               {/* Track Info & Controls Mini */}
               <div className={`flex flex-col ${expanded ? 'w-full text-center mb-6' : 'flex-grow justify-center overflow-hidden'}`}>
                 <motion.h4 layoutId="track-title" className={`text-white font-heading truncate ${expanded ? 'text-2xl mb-1' : 'text-sm'}`}>
-                  Our Love Story
+                  {track.title}
                 </motion.h4>
                 <motion.p layoutId="track-artist" className={`text-gray-soft font-body truncate ${expanded ? 'text-sm' : 'text-xs'}`}>
-                  Adam & Hann
+                  {track.artist}
                 </motion.p>
               </div>
 
@@ -202,8 +221,8 @@ export default function AudioPlayer({ isPlaying, onPlayChange }: AudioPlayerProp
                   <div className="w-full mb-6">
                     <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden cursor-pointer relative group">
                       <div
-                        className="h-full bg-gold rounded-full relative"
-                        style={{ width: `${progress}%` }}
+                         className="h-full bg-gold rounded-full relative"
+                         style={{ width: `${progress}%` }}
                       >
                         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-[0_0_10px_rgba(212,175,55,0.8)] opacity-0 group-hover:opacity-100 transition-opacity translate-x-1/2" />
                       </div>
@@ -215,8 +234,8 @@ export default function AudioPlayer({ isPlaying, onPlayChange }: AudioPlayerProp
                   </div>
 
                   {/* Main Controls */}
-                  <div className="flex items-center justify-center gap-8 mb-8">
-                    <button className="text-gray-soft hover:text-white transition-colors">
+                  <div className="flex items-center justify-center gap-6 md:gap-8 mb-6 md:mb-8">
+                    <button onClick={prevTrack} className="text-gray-soft hover:text-white transition-colors p-2">
                       <FaStepBackward size={20} />
                     </button>
                     <button
@@ -225,7 +244,7 @@ export default function AudioPlayer({ isPlaying, onPlayChange }: AudioPlayerProp
                     >
                       {isPlaying ? <FaPause size={24} /> : <FaPlay size={24} className="ml-1" />}
                     </button>
-                    <button className="text-gray-soft hover:text-white transition-colors">
+                    <button onClick={nextTrack} className="text-gray-soft hover:text-white transition-colors p-2">
                       <FaStepForward size={20} />
                     </button>
                   </div>
@@ -241,7 +260,7 @@ export default function AudioPlayer({ isPlaying, onPlayChange }: AudioPlayerProp
                   </div>
 
                   {/* Lyrics Preview */}
-                  <div className="mt-8 p-4 bg-white/5 rounded-xl border border-white/5 relative overflow-hidden group">
+                  <div className="mt-6 md:mt-8 p-4 bg-white/5 rounded-xl border border-white/5 relative overflow-hidden group">
                     <div className="absolute top-0 left-0 w-full h-4 bg-gradient-to-b from-[#1a1a1a] to-transparent z-10" />
                     <p className="text-center text-sm font-letter text-gold/80 italic transition-all duration-300">
                       &ldquo;{currentLyric}&rdquo;

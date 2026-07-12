@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Petals from "./Petals";
+import FloatingHearts from "./FloatingHearts";
 
 export default function GlobalEnvironment() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -100,6 +101,7 @@ export default function GlobalEnvironment() {
         className="fixed inset-0 z-[-1] pointer-events-none opacity-50"
       />
       <Petals />
+      <FloatingHearts />
     </>
   );
 }
