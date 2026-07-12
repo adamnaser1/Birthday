@@ -3,7 +3,17 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const secrets = [
+interface Secret {
+  id: number;
+  label: string;
+  message: string;
+  color: string;
+  youtubeId?: string;
+  link?: string;
+  linkText?: string;
+}
+
+const secrets: Secret[] = [
   {
     id: 1,
     label: "💌 Read this",
