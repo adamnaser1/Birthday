@@ -6,7 +6,7 @@ import Image from "next/image";
 import type { Variants } from "framer-motion";
 
 const TypewriterText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
-  const characters = Array.from(text);
+  const words = text.split(" ");
 
   const container: Variants = {
     hidden: { opacity: 0 },
@@ -40,14 +40,19 @@ const TypewriterText = ({ text, delay = 0 }: { text: string; delay?: number }) =
       viewport={{ once: true, margin: "-100px" }}
       className="inline-block"
     >
-      {characters.map((char, index) => (
-        <motion.span
-          key={index}
-          variants={child}
-          className="inline-block"
-        >
-          {char === " " ? "\u00A0" : char}
-        </motion.span>
+      {words.map((word, wordIndex) => (
+        <span key={wordIndex} className="inline-block">
+          {Array.from(word).map((char, charIndex) => (
+            <motion.span
+              key={charIndex}
+              variants={child}
+              className="inline-block"
+            >
+              {char}
+            </motion.span>
+          ))}
+          {wordIndex !== words.length - 1 && <span className="inline-block">&nbsp;</span>}
+        </span>
       ))}
     </motion.div>
   );

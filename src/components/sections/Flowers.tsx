@@ -63,12 +63,7 @@ const flowers: FlowerData[] = [
 ];
 
 function FlowerSVG({ flower, isGrown, onClick, index }: { flower: FlowerData; isGrown: boolean; onClick: () => void; index: number }) {
-  const petals = useMemo(() => {
-    return Array.from({ length: flower.petalCount }).map((_, i) => {
-      const angle = (360 / flower.petalCount) * i;
-      return { angle, key: i };
-    });
-  }, [flower.petalCount]);
+  // No more CSS petals, we render the image directly
 
   return (
     <motion.div 
@@ -81,35 +76,21 @@ function FlowerSVG({ flower, isGrown, onClick, index }: { flower: FlowerData; is
       transition={{ duration: 0.8, delay: index * 0.2 }}
     >
       {/* Flower head */}
-      <div className="relative w-28 h-28 md:w-32 md:h-32 z-10">
-        {petals.map(({ angle, key }) => (
-          <motion.div
-            key={key}
-            className="absolute top-1/2 left-1/2 origin-bottom"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={isGrown ? { scale: 1, opacity: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.8 + key * 0.1, type: "spring" }}
-            style={{
-              transform: `translate(-50%, -100%) rotate(${angle}deg)`,
-              width: 25,
-              height: 45,
-            }}
-          >
-            <div
-              className="w-full h-full rounded-t-full shadow-[0_0_10px_rgba(255,255,255,0.1)]"
-              style={{ backgroundColor: flower.petalColor, opacity: 0.95 }}
-            />
-          </motion.div>
-        ))}
-
-        <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full z-10 shadow-inner"
-          initial={{ scale: 0 }}
-          animate={isGrown ? { scale: 1 } : {}}
-          transition={{ duration: 0.5, delay: 1.6 }}
-          style={{ backgroundColor: flower.name === "Sunflower" ? "#5c3d0a" : (flower.name === "Daisy" ? "#e8c84a" : flower.color) }}
+      <motion.div 
+        className="relative w-24 h-24 md:w-32 md:h-32 z-10 rounded-full border-4 shadow-[0_0_20px_rgba(0,0,0,0.5)] overflow-hidden"
+        style={{ borderColor: flower.color, backgroundColor: "#000" }}
+        initial={{ scale: 0, opacity: 0 }}
+        animate={isGrown ? { scale: 1, opacity: 1 } : {}}
+        transition={{ duration: 0.8, delay: 0.8, type: "spring", damping: 15 }}
+      >
+        <Image 
+          src={`/media/${flower.photo}`} 
+          alt={flower.name} 
+          fill 
+          sizes="128px"
+          className="object-cover" 
         />
-      </div>
+      </motion.div>
 
       {/* Stem */}
       <motion.div

@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const timelineEvents = [
-  { id: 1, title: "The day we met", date: "Where it all began", align: "left", photo: "8.jpeg" },
-  { id: 2, title: "The first smile", date: "A memory etched forever", align: "right", photo: "9.jpeg" },
-  { id: 3, title: "The late night talks", date: "Hours felt like seconds", align: "left", photo: "k24.jpeg" },
-  { id: 4, title: "The day we realized we mattered", date: "A spark turned into a flame", align: "right", photo: "r29.jpeg" },
-  { id: 5, title: "The day we confessed", date: "Two hearts syncing", align: "left", photo: "s28.jpeg" },
-  { id: 6, title: "Today ❤️", date: "More in love than yesterday", align: "right", photo: "k25.jpeg" },
+  { id: 1, title: "The day we met", date: "Where it all began", align: "left" },
+  { id: 2, title: "The first smile", date: "A memory etched forever", align: "right" },
+  { id: 3, title: "The late night talks", date: "Hours felt like seconds", align: "left" },
+  { id: 4, title: "The day we realized we mattered", date: "A spark turned into a flame", align: "right" },
+  { id: 5, title: "The day we confessed", date: "Two hearts syncing", align: "left" },
+  { id: 6, title: "Today ❤️", date: "More in love than yesterday", align: "right" },
 ];
 
 export default function Timeline() {
@@ -63,24 +63,7 @@ export default function Timeline() {
                   `} 
                 />
 
-                {/* Small pinned photo */}
-                {event.photo && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3, duration: 0.8 }}
-                    className="relative w-20 h-20 mx-auto mb-4 rounded-lg overflow-hidden border-2 border-white/10 shadow-md group-hover:border-gold/30 transition-colors duration-500"
-                  >
-                    <Image 
-                      src={`/media/${event.photo}`} 
-                      alt={event.title} 
-                      fill 
-                      sizes="80px" 
-                      className="object-cover group-hover:scale-110 transition-transform duration-700" 
-                    />
-                  </motion.div>
-                )}
+
                 
                 <h3 className="text-2xl md:text-3xl font-heading text-gold mb-2 group-hover:scale-105 transition-transform duration-500 origin-center md:origin-inherit">
                   {event.title}
