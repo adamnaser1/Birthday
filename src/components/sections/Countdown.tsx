@@ -24,7 +24,7 @@ export default function Countdown({ onOpenGift }: CountdownProps) {
   useEffect(() => {
     isClient.current = true;
     // Target Date: July 13th, 2025, 00:00:00
-    const targetDate = new Date("2025-07-13T00:00:00").getTime();
+    const targetDate = new Date("2026-07-13T00:00:00").getTime();
 
     const updateCountdown = () => {
       const now = new Date().getTime();
@@ -153,24 +153,24 @@ export default function Countdown({ onOpenGift }: CountdownProps) {
                 <div className="absolute inset-0 bg-gradient-to-br from-[#1a0505] to-[#2a0a0a] border-2 border-gold/30 rounded-xl shadow-[0_20px_60px_rgba(163,19,42,0.3),inset_0_0_40px_rgba(212,175,55,0.05)]">
                   {/* Front face gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-gold/5 rounded-xl" />
-                  
+
                   {/* Vertical ribbon */}
-                  <motion.div 
+                  <motion.div
                     className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-full bg-gradient-to-b from-gold via-[#e8c84a] to-gold"
                     animate={giftStep >= 1 ? { opacity: 0, scaleX: 0 } : {}}
                     transition={{ duration: 0.8 }}
                   />
                   {/* Horizontal ribbon */}
-                  <motion.div 
+                  <motion.div
                     className="absolute top-1/2 left-0 -translate-y-1/2 w-full h-8 bg-gradient-to-r from-gold via-[#e8c84a] to-gold"
                     animate={giftStep >= 1 ? { opacity: 0, scaleY: 0 } : {}}
                     transition={{ duration: 0.8 }}
                   />
-                  
+
                   {/* Gift Icon Center */}
                   <AnimatePresence>
                     {giftStep === 0 && (
-                      <motion.div 
+                      <motion.div
                         exit={{ opacity: 0, scale: 0 }}
                         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
                       >
@@ -191,16 +191,16 @@ export default function Countdown({ onOpenGift }: CountdownProps) {
                   transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
                 >
                   {/* Lid ribbon cross */}
-                  <motion.div 
+                  <motion.div
                     className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center"
                     animate={giftStep >= 1 ? { opacity: 0 } : {}}
                   >
                     <div className="absolute w-full h-2 bg-gold rounded" />
                     <div className="absolute w-2 h-full bg-gold rounded" />
                   </motion.div>
-                  
+
                   {/* Bow */}
-                  <motion.div 
+                  <motion.div
                     className="absolute -top-6 left-1/2 -translate-x-1/2 text-3xl z-30"
                     animate={giftStep >= 1 ? { scale: 0, rotate: 180, opacity: 0 } : { y: [0, -3, 0] }}
                     transition={giftStep >= 1 ? { duration: 0.5 } : { duration: 2, repeat: Infinity, ease: "easeInOut" }}

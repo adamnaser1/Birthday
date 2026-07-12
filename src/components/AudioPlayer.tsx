@@ -16,21 +16,23 @@ const playlist = [
     title: "Earned it ",
     artist: "The Weekend",
     src: "/media/song.mp3",
-    cover: "/media/2.jpeg",
+    cover: "/media/18.jpeg",
   },
   {
     id: 2,
-    title: "As You Are",
-    artist: "The Weekend",
-    src: "/media/As You Are.mp3",
-    cover: "/media/8.jpeg",
-  },
-  {
-    id: 3,
     title: "Stand By Me",
     artist: "From me to YOU",
     src: "/media/Stand By Me  Cinematic Orchestral Cover  Emotional.mp3",
-    cover: "/media/10.jpeg",
+    cover: "/media/7.jpeg",
+
+  },
+  {
+    id: 3,
+    title: "As You Are",
+    artist: "The Weekend",
+    src: "/media/As You Are.mp3",
+    cover: "/media/2.jpeg",
+
   }
 ];
 

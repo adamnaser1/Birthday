@@ -26,8 +26,7 @@ const secrets = [
     id: 4,
     label: "🎵 Listen to this",
     message: "This is your favorite song. Every time I hear it, I think of you.",
-    link: "https://www.youtube.com/watch?v=8CWy_-afIpY&list=RD8CWy_-afIpY&start_radio=1",
-    linkText: "Listen to 'As You Are' on YouTube",
+    youtubeId: "8CWy_-afIpY",
     color: "bg-gold/20 text-gold border-gold/50",
   },
   {
@@ -108,7 +107,19 @@ export default function SecretMessages() {
                 &ldquo;{activeSecret.message}&rdquo;
               </p>
 
-              {activeSecret.link && (
+              {activeSecret.youtubeId ? (
+                <div className="mt-4 w-full aspect-video rounded-xl overflow-hidden shadow-[0_0_20px_rgba(212,175,55,0.3)] bg-black/50">
+                  <iframe 
+                    width="100%" 
+                    height="100%" 
+                    src={`https://www.youtube.com/embed/${activeSecret.youtubeId}`} 
+                    title="YouTube video player" 
+                    frameBorder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowFullScreen
+                  />
+                </div>
+              ) : activeSecret.link ? (
                 <a 
                   href={activeSecret.link} 
                   target="_blank" 
@@ -117,7 +128,7 @@ export default function SecretMessages() {
                 >
                   {activeSecret.linkText}
                 </a>
-              )}
+              ) : null}
             </motion.div>
           </motion.div>
         )}
