@@ -5,41 +5,70 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 interface FlowerData {
+  name: string;
   photo: string;
+  color: string;
+  petalColor: string;
+  stemColor: string;
   message: string;
+  petalCount: number;
 }
 
-// 5 red roses with photos
 const flowers: FlowerData[] = [
   {
-    photo: "2.jpeg",
+    name: "Rose",
+    photo: "rose.jpeg",
+    color: "#A3132A",
+    petalColor: "#cc1a36",
+    stemColor: "#2d5a27",
     message: "You are the most beautiful soul I have ever known.",
+    petalCount: 8,
   },
   {
-    photo: "k23.jpeg",
+    name: "Tulip",
+    photo: "tulip.jpeg",
+    color: "#ff69b4",
+    petalColor: "#ff85c8",
+    stemColor: "#2d5a27",
     message: "My love for you blooms more every day.",
+    petalCount: 6,
   },
   {
-    photo: "4.jpeg",
+    name: "Sunflower",
+    photo: "sunflower.jpeg",
+    color: "#FFD700",
+    petalColor: "#f0c420",
+    stemColor: "#2d5a27",
     message: "You are the sunshine in my darkest days.",
+    petalCount: 12,
   },
   {
-    photo: "6.jpeg",
+    name: "Daisy",
+    photo: "daisy.jpeg",
+    color: "#fff",
+    petalColor: "#ffffff",
+    stemColor: "#2d5a27",
     message: "Every little thing about you makes me happy.",
+    petalCount: 10,
   },
   {
-    photo: "10.jpeg",
+    name: "Lavender",
+    photo: "lavender.jpeg",
+    color: "#9370DB",
+    petalColor: "#a78bdb",
+    stemColor: "#2d5a27",
     message: "Your presence calms every storm inside me.",
+    petalCount: 6,
   },
 ];
 
-function RedRoseSVG({ isGrown, onClick, index }: { isGrown: boolean; onClick: () => void; index: number }) {
+function FlowerSVG({ flower, isGrown, onClick, index }: { flower: FlowerData; isGrown: boolean; onClick: () => void; index: number }) {
   const petals = useMemo(() => {
-    return Array.from({ length: 8 }).map((_, i) => {
-      const angle = (360 / 8) * i;
+    return Array.from({ length: flower.petalCount }).map((_, i) => {
+      const angle = (360 / flower.petalCount) * i;
       return { angle, key: i };
     });
-  }, []);
+  }, [flower.petalCount]);
 
   return (
     <motion.div 
@@ -67,8 +96,8 @@ function RedRoseSVG({ isGrown, onClick, index }: { isGrown: boolean; onClick: ()
             }}
           >
             <div
-              className="w-full h-full rounded-t-full shadow-[0_0_10px_rgba(163,19,42,0.5)]"
-              style={{ backgroundColor: "#cc1a36", opacity: 0.95 }}
+              className="w-full h-full rounded-t-full shadow-[0_0_10px_rgba(255,255,255,0.1)]"
+              style={{ backgroundColor: flower.petalColor, opacity: 0.95 }}
             />
           </motion.div>
         ))}
@@ -78,14 +107,14 @@ function RedRoseSVG({ isGrown, onClick, index }: { isGrown: boolean; onClick: ()
           initial={{ scale: 0 }}
           animate={isGrown ? { scale: 1 } : {}}
           transition={{ duration: 0.5, delay: 1.6 }}
-          style={{ backgroundColor: "#8b0000" }}
+          style={{ backgroundColor: flower.name === "Sunflower" ? "#5c3d0a" : (flower.name === "Daisy" ? "#e8c84a" : flower.color) }}
         />
       </div>
 
       {/* Stem */}
       <motion.div
         className="w-1.5 rounded-b-full origin-top relative z-0"
-        style={{ backgroundColor: "#2d5a27" }}
+        style={{ backgroundColor: flower.stemColor }}
         initial={{ height: 0 }}
         animate={isGrown ? { height: 120 } : {}}
         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -94,14 +123,14 @@ function RedRoseSVG({ isGrown, onClick, index }: { isGrown: boolean; onClick: ()
       {/* Leaves */}
       <motion.div
         className="absolute bottom-10 -left-6 w-10 h-5 rounded-tl-full rounded-br-full origin-right"
-        style={{ backgroundColor: "#2d5a27" }}
+        style={{ backgroundColor: flower.stemColor }}
         initial={{ scale: 0, rotate: 0 }}
         animate={isGrown ? { scale: 1, rotate: -30 } : {}}
         transition={{ duration: 0.5, delay: 0.4 }}
       />
       <motion.div
         className="absolute bottom-20 -right-6 w-10 h-5 rounded-tr-full rounded-bl-full origin-left"
-        style={{ backgroundColor: "#2d5a27" }}
+        style={{ backgroundColor: flower.stemColor }}
         initial={{ scale: 0, rotate: 0 }}
         animate={isGrown ? { scale: 1, rotate: 30 } : {}}
         transition={{ duration: 0.5, delay: 0.6 }}
@@ -148,42 +177,52 @@ export default function Flowers() {
           viewport={{ once: true }}
           className="text-4xl md:text-6xl font-heading text-white mb-4"
         >
-          {allGrown ? "A Bouquet For You 🌹" : "A Garden For You"}
+          {allGrown ? "A Bouquet For You 💐" : "A Garden For You"}
         </motion.h2>
         <p className="font-body text-gray-soft text-base md:text-lg px-4">
           {allGrown 
-            ? "Your roses have bloomed. Tap them to see the memories they hold."
-            : "Red roses are your favorite. Tap each seed to grow one. Tap again to reveal what's inside."}
+            ? "Your garden is full. Tap any flower to see the beautiful photos you sent."
+            : "Tap each seed to grow a flower. Tap again to reveal its photo."}
         </p>
       </div>
 
-      {/* The Bouquet / Garden */}
-      <div className={`relative flex flex-wrap justify-center items-end gap-6 md:gap-10 max-w-5xl mx-auto z-10 transition-all duration-1000 ${allGrown ? 'scale-110 md:scale-125 translate-y-10' : ''}`}>
-        {flowers.map((_, i) => (
-          <div key={i} className={`transition-all duration-1000 ${allGrown ? (i%2===0 ? '-rotate-6' : 'rotate-6') : ''}`}>
-            <RedRoseSVG
+      {/* The Garden */}
+      <div className="relative flex flex-wrap justify-center items-end gap-6 md:gap-10 max-w-5xl mx-auto z-10">
+        {flowers.map((flower, i) => (
+          <div key={i}>
+            <FlowerSVG
               index={i}
+              flower={flower}
               isGrown={grownFlowers.has(i)}
               onClick={() => handleFlowerClick(i)}
             />
           </div>
         ))}
-
-        {/* Bouquet ribbon (appears when all grown) */}
-        <AnimatePresence>
-          {allGrown && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 1 }}
-              className="absolute bottom-10 left-1/2 -translate-x-1/2 w-32 h-16 pointer-events-none z-20"
-            >
-              <div className="absolute inset-0 border-b-4 border-gold rounded-[100%] rotate-3 shadow-[0_5px_15px_rgba(212,175,55,0.4)]"></div>
-              <div className="absolute top-full left-1/2 -translate-x-1/2 -translate-y-2 w-8 h-12 bg-gold/80 clip-path-polygon-[0_0,100%_0,50%_100%] shadow-[0_5px_15px_rgba(212,175,55,0.4)]"></div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
+
+      {/* Bouquet Animation (Appears when all grown) */}
+      <AnimatePresence>
+        {allGrown && (
+          <motion.div
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.5, delay: 1, type: "spring", damping: 20 }}
+            className="mt-20 relative w-64 h-64 md:w-80 md:h-80 bg-white p-3 rounded-lg shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500 cursor-pointer"
+            onClick={() => setActiveFlower(99)} // Special index for the bouquet
+          >
+            <Image 
+              src="/media/boquetFleurs.jpeg" 
+              alt="Final Bouquet" 
+              fill 
+              sizes="300px" 
+              className="object-cover rounded-md" 
+            />
+            <div className="absolute -bottom-6 right-4 font-letter text-3xl text-rose -rotate-6">
+              For you ❤️
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Message & Photo Overlay */}
       <AnimatePresence>
@@ -205,7 +244,7 @@ export default function Flowers() {
             >
               <div className="relative w-48 h-48 md:w-64 md:h-64 mb-8 p-2 bg-white rounded-sm shadow-xl rotate-[-2deg]">
                 <Image 
-                  src={`/media/${flowers[activeFlower].photo}`} 
+                  src={activeFlower === 99 ? "/media/boquetFleurs.jpeg" : `/media/${flowers[activeFlower].photo}`} 
                   alt="Memory" 
                   fill 
                   className="object-cover rounded-sm"
@@ -214,7 +253,9 @@ export default function Flowers() {
               </div>
 
               <p className="font-letter text-2xl md:text-4xl text-white leading-relaxed">
-                &ldquo;{flowers[activeFlower].message}&rdquo;
+                {activeFlower === 99 
+                  ? "A bouquet as beautiful as you are. 💐" 
+                  : `"${flowers[activeFlower].message}"`}
               </p>
               
               <button 
