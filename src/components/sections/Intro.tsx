@@ -99,7 +99,7 @@ export default function Intro({ onBegin }: IntroProps) {
             >
               <div className="absolute inset-0 bg-gold/10 translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-500 ease-out rounded-full" />
               <span className="relative z-10 text-white group-hover:text-gold tracking-widest uppercase font-body text-sm transition-colors duration-300">
-                Begin
+                LET'S GOOOOOO
               </span>
             </button>
           </motion.div>

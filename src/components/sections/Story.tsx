@@ -64,7 +64,7 @@ export default function Story() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section 
+    <section
       ref={containerRef}
       className="relative min-h-screen w-full flex flex-col items-center justify-center py-32 px-6"
     >
@@ -88,18 +88,18 @@ export default function Story() {
         </p>
 
         <p className="text-xl md:text-3xl font-body font-light text-gray-soft leading-relaxed">
-          <TypewriterText text="Distance may separate us today." delay={9} />
+          <TypewriterText text="Distance may separate us today." delay={4.5} />
         </p>
 
         <p className="text-xl md:text-3xl font-body font-light text-gray-soft leading-relaxed">
-          <TypewriterText text="But my heart has never felt closer to yours." delay={11} />
+          <TypewriterText text="But my heart has never felt closer to yours." delay={5.5} />
         </p>
 
-        <motion.h3 
+        <motion.h3
           initial={{ opacity: 0, filter: "blur(10px)" }}
           whileInView={{ opacity: 1, filter: "blur(0px)" }}
           viewport={{ once: true }}
-          transition={{ duration: 2, delay: 14 }}
+          transition={{ duration: 2, delay: 7 }}
           className="text-4xl md:text-6xl font-letter text-gold mt-10"
         >
           Happy Birthday, my love.

@@ -23,7 +23,7 @@ export default function Countdown({ onFinish }: CountdownProps) {
   useEffect(() => {
     setIsMounted(true);
     // Target Date: July 13th, 2025, 00:00:00
-    const targetDate = new Date("2026-07-13T00:00:00").getTime();
+    const targetDate = new Date("2025-07-13T00:00:00").getTime();
 
     const updateCountdown = () => {
       const now = new Date().getTime();
