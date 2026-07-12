@@ -7,27 +7,27 @@ import Image from "next/image";
 const flowers = [
   {
     name: "Rose",
-    photo: "rose.jpeg",
+    photo: "rose.png",
     message: "You are the most beautiful soul I have ever known.",
   },
   {
     name: "Tulip",
-    photo: "tulip.jpeg",
+    photo: "tulip.png",
     message: "My love for you blooms more every day.",
   },
   {
     name: "Sunflower",
-    photo: "sunflower.jpeg",
+    photo: "sunflower.png",
     message: "You are the sunshine in my darkest days.",
   },
   {
     name: "Daisy",
-    photo: "daisy.jpeg",
+    photo: "daisy.png",
     message: "Every little thing about you makes me happy.",
   },
   {
     name: "Lavender",
-    photo: "lavender.jpeg",
+    photo: "lavender.png",
     message: "Your presence calms every storm inside me.",
   },
 ];
@@ -129,22 +129,39 @@ export default function Flowers() {
       <AnimatePresence>
         {allRevealed && (
           <motion.div
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className="mt-20 relative w-64 h-64 md:w-80 md:h-80 bg-white p-3 rounded-lg shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500 cursor-pointer z-10"
+            initial={{ opacity: 0, scale: 0.3, y: 80 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ 
+              duration: 1.2, 
+              delay: 0.5,
+              type: "spring",
+              damping: 12,
+              stiffness: 100,
+            }}
+            className="mt-16 flex flex-col items-center cursor-pointer z-10"
             onClick={() => setActiveFlower(99)}
           >
-            <Image
-              src="/media/boquetFleurs.jpeg"
-              alt="Bouquet"
-              fill
-              sizes="320px"
-              className="object-cover rounded-md"
-            />
-            <div className="absolute -bottom-6 right-4 font-letter text-3xl text-rose -rotate-6">
+            <motion.div
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="relative w-64 h-72 md:w-80 md:h-96"
+            >
+              <Image
+                src="/media/boquetFleurs.png"
+                alt="Bouquet"
+                fill
+                sizes="320px"
+                className="object-contain drop-shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
+              />
+            </motion.div>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.5, duration: 1 }}
+              className="mt-4 font-letter text-2xl md:text-4xl text-rose"
+            >
               For you ❤️
-            </div>
+            </motion.p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -172,12 +189,12 @@ export default function Flowers() {
                 <Image
                   src={
                     activeFlower === 99
-                      ? "/media/boquetFleurs.jpeg"
+                      ? "/media/boquetFleurs.png"
                       : `/media/${flowers[activeFlower].photo}`
                   }
                   alt="Memory"
                   fill
-                  className={activeFlower === 99 ? "object-cover rounded-md" : "object-contain"}
+                  className="object-contain drop-shadow-[0_5px_15px_rgba(0,0,0,0.3)]"
                   sizes="260px"
                 />
               </div>
