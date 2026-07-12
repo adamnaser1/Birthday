@@ -19,10 +19,10 @@ export default function Countdown({ onOpenGift }: CountdownProps) {
   });
   const [isFinished, setIsFinished] = useState(false);
   const [giftStep, setGiftStep] = useState(0); // 0=ribbon, 1=lid lifting, 2=opened
-  const isClient = useRef(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    isClient.current = true;
+    setIsMounted(true);
     // Target Date: July 13th, 2025, 00:00:00
     const targetDate = new Date("2026-07-13T00:00:00").getTime();
 
@@ -95,7 +95,7 @@ export default function Countdown({ onOpenGift }: CountdownProps) {
     }
   };
 
-  if (!isClient.current) return null;
+  if (!isMounted) return null;
 
   return (
     <section className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden py-20 px-4">
