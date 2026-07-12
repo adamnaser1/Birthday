@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute, FaStepForward, FaStepBackward, FaChevronUp, FaChevronDown, FaHeart } from "react-icons/fa";
+import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute, FaStepForward, FaStepBackward, FaChevronDown, FaHeart } from "react-icons/fa";
 import Image from "next/image";
 
 interface AudioPlayerProps {
@@ -10,58 +10,28 @@ interface AudioPlayerProps {
   onPlayChange: (playing: boolean) => void;
 }
 
-const lyrics = [
-  { time: 0, text: "♪ Instrumental ♪" },
-  { time: 2, text: "I'ma care for you" },
-  { time: 9, text: "I'ma care for you, you, you, you" },
-  { time: 20, text: "♪ Instrumental ♪" },
-  { time: 38, text: "You make it look like it's magic (Oh, yeah)" },
-  { time: 43, text: "'Cause I see nobody, nobody but you, you, you" },
-  { time: 51, text: "I'm never confused" },
-  { time: 53, text: "Hey, hey" },
-  { time: 56, text: "And I'm so used to bein' used" },
-  { time: 60, text: "So I love when you call unexpected" },
-  { time: 66, text: "'Cause I hate when the moment's expected" },
-  { time: 71, text: "So I'ma care for you, you, you" },
-  { time: 77, text: "I'ma care for you, you, you, you, yeah" },
-  { time: 84, text: "'Cause girl, you're perfect" },
-  { time: 86, text: "You're always worth it" },
-  { time: 89, text: "And you deserve it" },
-  { time: 92, text: "The way you work it" },
-  { time: 96, text: "'Cause girl, you earned it, yeah" },
-  { time: 102, text: "Girl, you earned it, yeah" },
-  { time: 109, text: "You know our love would be tragic (Oh, yeah)" },
-  { time: 114, text: "So you don't pay it, don't pay it no mind, mind, mind" },
-  { time: 122, text: "We live with no lies" },
-  { time: 125, text: "Hey, hey" },
-  { time: 127, text: "You're my favorite kind of night" },
-  { time: 131, text: "So I love when you call unexpected" },
-  { time: 137, text: "'Cause I hate when the moment's expected" },
-  { time: 143, text: "So I'ma care for you, you, you" },
-  { time: 148, text: "I'ma care for you, you, you, you, yeah" },
-  { time: 155, text: "'Cause girl, you're perfect (Girl, you're perfect)" },
-  { time: 158, text: "You're always worth it (Always worth it)" },
-  { time: 161, text: "And you deserve it (And you deserve it)" },
-  { time: 164, text: "The way you work it (The way you work it)" },
-  { time: 168, text: "'Cause girl, you earned it, yeah (Earned it)" },
-  { time: 173, text: "Girl, you earned it, yeah" },
-  { time: 179, text: "On that lonely night (Lonely night)" },
-  { time: 183, text: "We said it wouldn't be love" },
-  { time: 185, text: "But we felt the rush (Fell in love)" },
-  { time: 189, text: "It made us believe it was only us (Only us)" },
-  { time: 194, text: "Convinced we were broken inside, yeah, inside, yeah" },
-  { time: 209, text: "'Cause girl, you're perfect (Girl, you're perfect)" },
-  { time: 212, text: "You're always worth it (Always worth it)" },
-  { time: 215, text: "And you deserve it (And you deserve it)" },
-  { time: 218, text: "The way you work it (The way you work it)" },
-  { time: 221, text: "'Cause girl, you earned it, yeah (You earned it)" },
-  { time: 227, text: "Girl, you earned it, yeah (You earned it)" },
-  { time: 236, text: "Na-na-na-na-na" },
-  { time: 239, text: "Oh-oh-oh yeah, yeah" },
-  { time: 245, text: "'Cause girl, you're perfect" },
-  { time: 248, text: "The way you work it" },
-  { time: 251, text: "You deserve it girl, you deserve it" },
-  { time: 257, text: "Girl, you earned it, yeah, yeah" }
+const playlist = [
+  {
+    id: 1,
+    title: "Our Love Story",
+    artist: "Adam & Hann",
+    src: "/media/song.mp3",
+    cover: "/media/2.jpeg",
+  },
+  {
+    id: 2,
+    title: "As You Are",
+    artist: "Adam & Hann",
+    src: "/media/As You Are.mp3",
+    cover: "/media/8.jpeg",
+  },
+  {
+    id: 3,
+    title: "Stand By Me",
+    artist: "Adam & Hann",
+    src: "/media/Stand By Me  Cinematic Orchestral Cover  Emotional.mp3",
+    cover: "/media/10.jpeg",
+  }
 ];
 
 export default function AudioPlayer({ isPlaying, onPlayChange }: AudioPlayerProps) {
@@ -132,7 +102,6 @@ export default function AudioPlayer({ isPlaying, onPlayChange }: AudioPlayerProp
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
 
-  // Simple visualizer text instead of lyrics
   const currentLyric = isPlaying ? "♪ Playing ♪" : "Paused";
 
   return (
